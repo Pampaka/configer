@@ -1,2 +1,2 @@
-# configer
+# Configer
 Configuration server for systems
