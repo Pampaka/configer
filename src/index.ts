@@ -1,15 +1,17 @@
-require('dotenv')
-const express = require('express')
+import 'dotenv'
+import express from 'express'
+
 const app = express()
 const PORT = process.env.PORT || 5050
 
-function appInit() {
+async function appInit() {
 	app.use(express.json())
 
 	// const routes = require("./routes/index");
 	// app.use("/api", routes);
 
-	const errorHandler = require('./middlewares/errorHandler')
+
+	const { errorHandler } = await import('./middlewares/errorHandler.js')
 	app.use(errorHandler)
 }
 
@@ -24,11 +26,9 @@ async function dbInit() {
 	}
 }
 
-;(async () => {
-	await dbInit()
-	appInit()
+await dbInit()
+await appInit()
 
-	app.listen(PORT, () => {
-		console.log(`Server has been started on port ${PORT}`)
-	})
-})()
+app.listen(PORT, () => {
+	console.log(`Server has been started on port ${PORT}`)
+})

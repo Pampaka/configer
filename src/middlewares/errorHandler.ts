@@ -1,11 +1,7 @@
 import { Response, Request } from 'express'
-const ApiError = require("../error/ApiError")
+import { ApiError } from '../error/ApiError.js'
 
-module.exports = function errorHandler(
-	err: typeof ApiError,
-	req: Request,
-	res: Response
-) {
+export function errorHandler(err: ApiError | any, req: Request, res: Response) {
 	if (err instanceof ApiError) {
 		res.status(err.status).json({
 			message: err.message,

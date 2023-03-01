@@ -27,7 +27,7 @@
     // "moduleDetection": "auto",                        /* Control what method is used to detect module-format JS files. */
 
     /* Modules */
-    "module": "commonjs",
+    "module": "ESNext",
     /* Specify what module code is generated. */
     "rootDir": "./src",                                  /* Specify the root folder within your source files. */
     "moduleResolution": "node",
@@ -111,6 +111,8 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules"],
   "ts-node": {
-    "emit": true
-  }
+    "emit": true,
+    "esm": true
+  },
+  "lib": ["esnext"]
 }
