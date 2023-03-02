@@ -1,9 +1,10 @@
 import { Model, Sequelize } from 'sequelize'
-import initConfigModel from './models/configModel.js'
 
-type Models = { [key: string]: Model }
+import initConfigModel from './models/config.js'
 
-interface DataBase {
+export type Models = { [key: string]: Model }
+
+export type DataBaseSource = {
 	sequelize: Sequelize
 	models: Models
 }
@@ -20,7 +21,7 @@ export default async function () {
 		}
 	)
 
-	let models = {}
+	let models: Models = {}
 	const initModels = [initConfigModel]
 	initModels.forEach(init => {
 		models = Object.assign(models, init(sequelize))
@@ -28,5 +29,5 @@ export default async function () {
 
 	await sequelize.sync()
 
-	return { sequelize, models } as DataBase
+	return { sequelize, models } as DataBaseSource
 }
