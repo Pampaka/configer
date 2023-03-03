@@ -1,8 +1,10 @@
-import { Model, Sequelize } from 'sequelize'
+import { Sequelize } from 'sequelize'
 
-import initConfigModel from './models/config.js'
+import initConfigModel, { Config } from './models/config.js'
 
-export type Models = { [key: string]: Model }
+export type Models = {
+	Config: typeof Config
+}
 
 export type DataBaseSource = {
 	sequelize: Sequelize
@@ -17,15 +19,14 @@ export default async function () {
 		{
 			dialect: 'postgres',
 			host: process.env.DB_HOST || 'localhost',
-			port: Number(process.env.DB_PORT) || 5432
+			port: Number(process.env.DB_PORT) || 5432,
+			logging: false
 		}
 	)
 
-	let models: Models = {}
-	const initModels = [initConfigModel]
-	initModels.forEach(init => {
-		models = Object.assign(models, init(sequelize))
-	})
+	const models: Models = {
+		Config: initConfigModel(sequelize)
+	}
 
 	await sequelize.sync()
 

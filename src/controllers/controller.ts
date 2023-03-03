@@ -5,9 +5,9 @@ export type ControllerOptions = {
 }
 
 export default class Controller {
-	#models: ControllerOptions['models']
+	protected models: Models
 
 	constructor(options: ControllerOptions) {
-		this.#models = options.models
+		this.models = options.models
 	}
 }

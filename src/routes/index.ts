@@ -12,7 +12,7 @@ export default function (options: ApiOptions): Router {
 	const router = Router()
 
 	router.use(
-		'api',
+		'/api',
 		apiRouter({
 			middlewares: options.middlewares,
 			controllers: options.controllers.api
