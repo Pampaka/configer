@@ -17,12 +17,12 @@ const database = await initDB()
 const controllersOptions: ControllerOptions = { models: database.models }
 const controllers = await initControllers(controllersOptions)
 
-// api
+// controllers
 const apiOptions: ApiOptions = {
 	controllers: controllers,
 	middlewares: []
 }
-app.use(initRouters(apiOptions))
+app.use('/api', initRouters(apiOptions))
 
 const { errorHandler } = await import('./middlewares/errorHandler.js')
 app.use(errorHandler)

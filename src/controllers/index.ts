@@ -1,13 +1,13 @@
 import { ControllerOptions } from './controller'
 
-import apiControllers, { ApiControllers } from './api/index.js'
+import ConfigController from './controllers/config.js'
 
-export type Controllers = {
-	api: ApiControllers
+export type ApiControllers = {
+	config: ConfigController
 }
 
-export default function (options: ControllerOptions): Controllers {
+export default function (options: ControllerOptions): ApiControllers {
 	return {
-		api: apiControllers(options)
+		config: new ConfigController(options)
 	}
 }

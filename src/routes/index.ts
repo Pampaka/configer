@@ -1,21 +1,21 @@
-import { Controllers } from '../controllers'
 import { Router } from 'express'
+import { ApiControllers } from '../controllers'
 
-import apiRouter from './api/index.js'
+import configRouter from './api/config.js'
 
 export type ApiOptions = {
-	controllers: Controllers
+	controllers: ApiControllers
 	middlewares: Array<Function>
 }
 
-export default function (options: ApiOptions): Router {
+export default function (sources: ApiOptions): Router {
 	const router = Router()
 
 	router.use(
-		'/api',
-		apiRouter({
-			middlewares: options.middlewares,
-			controllers: options.controllers.api
+		'/config',
+		configRouter({
+			middlewares: sources.middlewares,
+			controller: sources.controllers.config
 		})
 	)
 

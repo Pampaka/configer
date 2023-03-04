@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import ConfigController from '../../../controllers/api/config'
+import ConfigController from '../../controllers/controllers/config'
 
 export type ConfigRouterOptions = {
 	middlewares: Array<Function>
