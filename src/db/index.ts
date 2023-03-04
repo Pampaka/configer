@@ -1,9 +1,8 @@
 import { Sequelize } from 'sequelize'
-
-import initConfigModel, { Config } from './models/config.js'
+import initConfigModel, { ConfigModel } from './models/config.js'
 
 export type Models = {
-	Config: typeof Config
+	Config: typeof ConfigModel
 }
 
 export type DataBaseSource = {
@@ -11,7 +10,7 @@ export type DataBaseSource = {
 	models: Models
 }
 
-export default async function () {
+export default async function (): Promise<DataBaseSource> {
 	const sequelize = new Sequelize(
 		process.env.DB_NAME || 'dbname',
 		process.env.DB_USER || 'username',
@@ -34,5 +33,5 @@ export default async function () {
 		await sequelize.sync()
 	}
 
-	return { sequelize, models } as DataBaseSource
+	return { sequelize, models }
 }

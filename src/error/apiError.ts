@@ -1,9 +1,9 @@
-interface ErrorItem {
+export interface ErrorItem {
 	prop: string
 	message: string
 }
 
-type Errors = Array<ErrorItem>
+export type Errors = Array<ErrorItem>
 
 export class ApiError extends Error {
 	status: number

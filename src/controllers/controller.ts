@@ -4,10 +4,10 @@ export type ControllerOptions = {
 	models: Models
 }
 
-export default class Controller {
-	protected models: Models
+export default abstract class Controller {
+	protected models: ControllerOptions['models']
 
-	constructor(options: ControllerOptions) {
+	protected constructor(options: ControllerOptions) {
 		this.models = options.models
 	}
 }

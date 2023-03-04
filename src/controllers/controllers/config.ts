@@ -1,10 +1,10 @@
 import Controller, { ControllerOptions } from '../controller.js'
 import { NextFunction, Request, Response } from 'express'
-import { Config } from '../../db/models/config'
+import { ConfigModel } from '../../db/models/config'
 import { badRequest } from '../../error/apiError.js'
 
 class ConfigController extends Controller {
-	protected configModel: typeof Config
+	protected configModel: typeof ConfigModel
 
 	constructor(options: ControllerOptions) {
 		super(options)

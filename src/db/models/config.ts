@@ -8,9 +8,9 @@ import {
 } from 'sequelize'
 import { randomUUID } from 'crypto'
 
-export class Config extends Model<
-	InferAttributes<Config>,
-	InferCreationAttributes<Config>
+export class ConfigModel extends Model<
+	InferAttributes<ConfigModel>,
+	InferCreationAttributes<ConfigModel>
 > {
 	declare id: CreationOptional<number>
 	declare name: string
@@ -18,8 +18,8 @@ export class Config extends Model<
 	declare data: CreationOptional<string | null>
 }
 
-export default function (sequelize: Sequelize): typeof Config {
-	Config.init(
+export default function (sequelize: Sequelize): typeof ConfigModel {
+	ConfigModel.init(
 		{
 			id: {
 				type: DataTypes.UUID,
@@ -46,5 +46,5 @@ export default function (sequelize: Sequelize): typeof Config {
 		}
 	)
 
-	return Config
+	return ConfigModel
 }
