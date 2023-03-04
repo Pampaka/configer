@@ -6,6 +6,8 @@ import initDB from './db/index.js'
 import initControllers from './controllers/index.js'
 import initRouters, { ApiOptions } from './routes/index.js'
 
+import errorHandler from './middlewares/errorHandler.js'
+
 // init app
 const app = express()
 app.use(express.json())
@@ -23,8 +25,6 @@ const apiOptions: ApiOptions = {
 	middlewares: []
 }
 app.use('/api', initRouters(apiOptions))
-
-const { errorHandler } = await import('./middlewares/errorHandler.js')
 app.use(errorHandler)
 
 const PORT = process.env.PORT || '5050'
