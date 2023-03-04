@@ -18,7 +18,7 @@ export class ApiError extends Error {
 }
 
 export function badRequest(message: string, errors: Errors = []): ApiError {
-	return new ApiError(404, message, errors)
+	return new ApiError(400, message, errors)
 }
 
 export function internal(message: string = 'Unexpected error'): ApiError {
