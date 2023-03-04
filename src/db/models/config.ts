@@ -12,11 +12,10 @@ export class Config extends Model<
 	InferAttributes<Config>,
 	InferCreationAttributes<Config>
 > {
-	declare id: number
+	declare id: CreationOptional<number>
 	declare name: string
+	declare env: string
 	declare data: CreationOptional<string | null>
-	declare createdAt: CreationOptional<Date>
-	declare updatedAt: CreationOptional<Date>
 }
 
 export default function (sequelize: Sequelize): typeof Config {
@@ -32,12 +31,14 @@ export default function (sequelize: Sequelize): typeof Config {
 			name: {
 				type: DataTypes.STRING,
 				allowNull: false,
-				primaryKey: true,
-				unique: true
+				primaryKey: true
 			},
-			data: { type: DataTypes.JSON },
-			createdAt: DataTypes.DATE,
-			updatedAt: DataTypes.DATE
+			env: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				primaryKey: true
+			},
+			data: { type: DataTypes.JSON }
 		},
 		{
 			sequelize,

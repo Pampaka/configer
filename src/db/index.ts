@@ -28,7 +28,11 @@ export default async function () {
 		Config: initConfigModel(sequelize)
 	}
 
-	await sequelize.sync()
+	if (process.env.NODE_ENV === 'development') {
+		await sequelize.sync({ alter: true })
+	} else {
+		await sequelize.sync()
+	}
 
 	return { sequelize, models } as DataBaseSource
 }
