@@ -9,7 +9,7 @@ export type ConfigRouterOptions = {
 export default function ({ controller }: ConfigRouterOptions): Router {
 	const router = Router()
 
-	router.get('/:configName', controller.getByName.bind(controller))
+	router.get('/:name', controller.getByName.bind(controller))
 
 	return router
 }
