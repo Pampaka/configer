@@ -1,10 +1,9 @@
 import 'dotenv'
 import express from 'express'
-import { ControllerOptions } from './controllers/controller'
 
 import initDB from './db/index.js'
 import initControllers from './controllers/index.js'
-import initRouters, { ApiOptions } from './routes/index.js'
+import initRouters from './routes/index.js'
 
 import errorHandler from './middlewares/errorHandler.js'
 
@@ -13,17 +12,13 @@ const app = express()
 app.use(express.json())
 
 // db
-const database = await initDB()
+const models = await initDB()
 
 // controllers
-const controllersOptions: ControllerOptions = { models: database.models }
-const controllers = await initControllers(controllersOptions)
+const controllers = await initControllers(models)
 
 // api
-const apiOptions: ApiOptions = {
-	controllers: controllers
-}
-app.use('/api', initRouters(apiOptions))
+app.use('/api', initRouters(controllers))
 app.use(errorHandler)
 
 // start

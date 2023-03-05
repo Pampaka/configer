@@ -1,4 +1,5 @@
-import Controller, { ControllerOptions } from '../controller.js'
+import Controller from '../controller.js'
+import { Models } from '../../db'
 import { NextFunction, Request, Response } from 'express'
 import { ConfigModel } from '../../db/models/config'
 import { badRequest } from '../../error/apiError.js'
@@ -6,8 +7,8 @@ import { badRequest } from '../../error/apiError.js'
 class ConfigController extends Controller {
 	protected configModel: typeof ConfigModel
 
-	constructor(options: ControllerOptions) {
-		super(options)
+	constructor(models: Models) {
+		super(models)
 		this.configModel = this.models.Config
 	}
 
@@ -78,7 +79,7 @@ class ConfigController extends Controller {
 
 			res.json(newConfig[1][0])
 		} catch (e: unknown) {
-			console.warn('Error creating config: ', e)
+			console.warn('Error updating config: ', e)
 			next(e)
 		}
 	}

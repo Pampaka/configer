@@ -1,13 +1,9 @@
 import { Models } from '../db'
 
-export type ControllerOptions = {
-	models: Models
-}
-
 export default abstract class Controller {
-	protected models: ControllerOptions['models']
+	protected models: Models
 
-	protected constructor(options: ControllerOptions) {
-		this.models = options.models
+	protected constructor(models: Models) {
+		this.models = models
 	}
 }
