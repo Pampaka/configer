@@ -41,20 +41,10 @@ class ConfigController extends Controller {
 		try {
 			const { name, env, data } = req.body
 
-			if (env === undefined) return next(badRequest('Parameter "env" required'))
-			if (name === undefined) return next(badRequest('Parameter "name" required'))
-			if (data !== undefined) {
-				try {
-					JSON.parse(data)
-				} catch (e) {
-					return next(badRequest('Error parsing json "data"'))
-				}
-			}
-
 			const checkConfig = await this.configModel.findOne({
 				where: { name, env }
 			})
-			if (!!checkConfig) return next(badRequest('"Name" and "env" binding must be unique'))
+			if (!!checkConfig) return next(badRequest(`Config "${name}:${env}" already exists`))
 
 			const newConfig = await this.configModel.create({ name, env, data })
 

@@ -19,14 +19,14 @@ const database = await initDB()
 const controllersOptions: ControllerOptions = { models: database.models }
 const controllers = await initControllers(controllersOptions)
 
-// controllers
+// api
 const apiOptions: ApiOptions = {
-	controllers: controllers,
-	middlewares: []
+	controllers: controllers
 }
 app.use('/api', initRouters(apiOptions))
 app.use(errorHandler)
 
+// start
 const PORT = process.env.APP_PORT || '5050'
 app.listen(PORT, () => {
 	console.log(`Server has been started on port ${PORT}`)

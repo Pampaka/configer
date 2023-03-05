@@ -1,9 +1,10 @@
+import { ValidationError } from 'express-validator'
+
 export interface ErrorItem {
-	prop: string
-	message: string
+	[key: string]: string
 }
 
-export type Errors = Array<ErrorItem>
+export type Errors = ErrorItem[] | ValidationError[]
 
 export class ApiError extends Error {
 	status: number

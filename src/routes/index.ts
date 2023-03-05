@@ -5,7 +5,6 @@ import configRouter from './api/config.js'
 
 export type ApiOptions = {
 	controllers: ApiControllers
-	middlewares: Array<Function>
 }
 
 export default function (sources: ApiOptions): Router {
@@ -14,7 +13,6 @@ export default function (sources: ApiOptions): Router {
 	router.use(
 		'/config',
 		configRouter({
-			middlewares: sources.middlewares,
 			controller: sources.controllers.config
 		})
 	)
