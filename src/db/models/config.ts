@@ -6,13 +6,11 @@ import {
 	InferCreationAttributes,
 	CreationOptional
 } from 'sequelize'
-import { randomUUID } from 'crypto'
 
 export class ConfigModel extends Model<
 	InferAttributes<ConfigModel>,
 	InferCreationAttributes<ConfigModel>
 > {
-	declare id: CreationOptional<number>
 	declare name: string
 	declare env: string
 	declare data: CreationOptional<string | null>
@@ -21,13 +19,6 @@ export class ConfigModel extends Model<
 export default function (sequelize: Sequelize): typeof ConfigModel {
 	ConfigModel.init(
 		{
-			id: {
-				type: DataTypes.UUID,
-				primaryKey: true,
-				allowNull: false,
-				defaultValue: randomUUID(),
-				unique: true
-			},
 			name: {
 				type: DataTypes.STRING,
 				allowNull: false,
