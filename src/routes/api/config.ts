@@ -13,5 +13,7 @@ export default function ({ controller }: ConfigRouterOptions): Router {
 
 	router.post('/', ...checkConfigParams, controller.create.bind(controller))
 
+	router.put('/', ...checkConfigParams, controller.update.bind(controller))
+
 	return router
 }

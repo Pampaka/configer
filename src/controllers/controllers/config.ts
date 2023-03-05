@@ -54,6 +54,28 @@ class ConfigController extends Controller {
 			next(e)
 		}
 	}
+
+	async update(
+		req: Request<{}, {}, { env: string; name: string; data: string }, {}>,
+		res: Response,
+		next: NextFunction
+	) {
+		try {
+			const { name, env, data } = req.body
+
+			const checkConfig = await this.configModel.findOne({
+				where: { name, env }
+			})
+			if (!checkConfig) return next(badRequest(`Config "${name}:${env}" does not exist`))
+
+			const newConfig = await this.configModel.update({ data }, { where: { name, env }, returning: true })
+
+			res.json(newConfig[1][0])
+		} catch (e: unknown) {
+			console.warn('Error creating config: ', e)
+			next(e)
+		}
+	}
 }
 
 export default ConfigController
