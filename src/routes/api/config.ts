@@ -6,7 +6,7 @@ import checkConfigParams from '../../middlewares/checkConfigParams.js'
 export default function (controller: ConfigController): Router {
 	const router = Router()
 
-	router.get('/:name', controller.getByName.bind(controller))
+	router.get('/:name/:env', controller.getByName.bind(controller))
 
 	router.post('/', ...checkConfigParams, controller.create.bind(controller))
 

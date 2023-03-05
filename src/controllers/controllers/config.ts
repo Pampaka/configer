@@ -13,15 +13,12 @@ class ConfigController extends Controller {
 	}
 
 	async getByName(
-		req: Request<{ name: string }, {}, {}, { env: string }>,
+		req: Request<{ name: string; env: string }>,
 		res: Response,
 		next: NextFunction
 	) {
 		try {
-			const { name } = req.params
-			const { env } = req.query
-
-			if (env === undefined) return next(badRequest('Parameter "env" required'))
+			const { name, env } = req.params
 
 			const configData = await this.configModel.findOne({
 				where: { name, env }
