@@ -1,9 +1,11 @@
 import { Sequelize } from 'sequelize'
 
 import initConfigModel, { ConfigModel } from './models/config.js'
+import initUserModel, { UserModel } from './models/user.js'
 
 export type Models = {
 	Config: typeof ConfigModel
+	User: typeof UserModel
 }
 
 export default async function (): Promise<Models> {
@@ -20,7 +22,8 @@ export default async function (): Promise<Models> {
 	)
 
 	const models: Models = {
-		Config: initConfigModel(sequelize)
+		Config: initConfigModel(sequelize),
+		User: initUserModel(sequelize)
 	}
 
 	if (process.env.NODE_ENV === 'development') {
