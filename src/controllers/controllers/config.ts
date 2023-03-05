@@ -12,7 +12,7 @@ class ConfigController extends Controller {
 	}
 
 	async getByName(
-		req: Request<{ name: string }, {}, {}, { env: string | undefined }>,
+		req: Request<{ name: string }, {}, {}, { env: string }>,
 		res: Response,
 		next: NextFunction
 	) {
@@ -28,7 +28,39 @@ class ConfigController extends Controller {
 
 			res.json(configData)
 		} catch (e: unknown) {
-			console.warn('Error get config: ', e)
+			console.warn('Error getting config: ', e)
+			next(e)
+		}
+	}
+
+	async create(
+		req: Request<{}, {}, { env: string; name: string; data: string }, {}>,
+		res: Response,
+		next: NextFunction
+	) {
+		try {
+			const { name, env, data } = req.body
+
+			if (env === undefined) return next(badRequest('Parameter "env" required'))
+			if (name === undefined) return next(badRequest('Parameter "name" required'))
+			if (data !== undefined) {
+				try {
+					JSON.parse(data)
+				} catch (e) {
+					return next(badRequest('Error parsing json "data"'))
+				}
+			}
+
+			const checkConfig = await this.configModel.findOne({
+				where: { name, env }
+			})
+			if (!!checkConfig) return next(badRequest('"Name" and "env" binding must be unique'))
+
+			const newConfig = await this.configModel.create({ name, env, data })
+
+			res.json(newConfig)
+		} catch (e: unknown) {
+			console.warn('Error creating config: ', e)
 			next(e)
 		}
 	}

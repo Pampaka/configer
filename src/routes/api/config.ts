@@ -11,5 +11,7 @@ export default function ({ controller }: ConfigRouterOptions): Router {
 
 	router.get('/:name', controller.getByName.bind(controller))
 
+	router.post('/', controller.create.bind(controller))
+
 	return router
 }
