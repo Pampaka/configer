@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import ConfigController from '../../controllers/controllers/config'
+import ConfigsController from '../../controllers/controllers/configs'
 
 import checkConfigParams from '../../middlewares/checkConfigParams.js'
 
-export default function (controller: ConfigController): Router {
+export default function (controller: ConfigsController): Router {
 	const router = Router()
 
 	router.get('/:name/:env', controller.getByName.bind(controller))

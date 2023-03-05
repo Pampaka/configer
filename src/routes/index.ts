@@ -1,14 +1,14 @@
 import { Router } from 'express'
 import { Controllers } from '../controllers'
 
-import configRouter from './api/config.js'
-import userRouter from './api/user.js'
+import configsRouter from './api/configs.js'
+import authRouter from './api/auth.js'
 
 export default function (controllers: Controllers): Router {
 	const router = Router()
 
-	router.use('/config', configRouter(controllers.config))
-	router.use('/user', userRouter(controllers.user))
+	router.use('/config', configsRouter(controllers.configs))
+	router.use('/auth', authRouter(controllers.auth))
 
 	return router
 }

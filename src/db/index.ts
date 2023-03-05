@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize'
 
-import initConfigModel, { ConfigModel } from './models/config.js'
+import initConfigModel, { ConfigModel } from './models/configs.js'
 import initUserModel, { UserModel } from './models/user.js'
 
 export type Models = {

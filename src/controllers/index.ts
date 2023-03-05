@@ -1,15 +1,15 @@
 import { Models } from '../db'
-import ConfigController from './controllers/config.js'
-import UserController from './controllers/user.js'
+import ConfigsController from './controllers/configs.js'
+import AuthController from './controllers/auth.js'
 
 export type Controllers = {
-	config: ConfigController
-	user: UserController
+	configs: ConfigsController
+	auth: AuthController
 }
 
 export default function (models: Models): Controllers {
 	return {
-		config: new ConfigController(models),
-		user: new UserController(models)
+		configs: new ConfigsController(models),
+		auth: new AuthController(models)
 	}
 }

@@ -1,15 +1,13 @@
-import Controller from '../controller.js'
 import { Models } from '../../db'
 import { NextFunction, Request, Response } from 'express'
-import { ConfigModel } from '../../db/models/config'
+import { ConfigModel } from '../../db/models/configs'
 import { badRequest } from '../../error/apiError.js'
 
-class ConfigController extends Controller {
+class ConfigsController {
 	protected configModel: typeof ConfigModel
 
 	constructor(models: Models) {
-		super(models)
-		this.configModel = this.models.Config
+		this.configModel = models.Config
 	}
 
 	async getByName(
@@ -82,4 +80,4 @@ class ConfigController extends Controller {
 	}
 }
 
-export default ConfigController
+export default ConfigsController
