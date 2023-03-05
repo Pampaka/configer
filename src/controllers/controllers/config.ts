@@ -68,7 +68,13 @@ class ConfigController extends Controller {
 			})
 			if (!checkConfig) return next(badRequest(`Config "${name}:${env}" does not exist`))
 
-			const newConfig = await this.configModel.update({ data }, { where: { name, env }, returning: true })
+			const newConfig = await this.configModel.update(
+				{ data },
+				{
+					where: { name, env },
+					returning: true
+				}
+			)
 
 			res.json(newConfig[1][0])
 		} catch (e: unknown) {
