@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common'
-import { SequelizeModule } from '@nestjs/sequelize'
 import { ConfigModule } from '@nestjs/config'
+import { SequelizeModule } from '@nestjs/sequelize'
+import { UsersModule } from './users/users.module'
 import { ConfigsModule } from './configs/configs.module'
+import { UserModel } from './users/users.model'
 import { ConfigModel } from './configs/configs.model'
 
 @Module({
@@ -16,10 +18,11 @@ import { ConfigModel } from './configs/configs.model'
 			username: process.env.DB_USER || 'mi-life',
 			password: process.env.DB_PASS || 'root',
 			database: process.env.DB_NAME || 'mi-life',
-			models: [ConfigModel],
+			models: [ConfigModel, UserModel],
 			autoLoadModels: true,
 			logging: false /* TODO change to loglevel */
 		}),
+		UsersModule,
 		ConfigsModule
 	]
 })
