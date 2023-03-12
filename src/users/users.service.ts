@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
 import { UserModel } from './users.model'
 import { hash } from 'bcrypt'
+import { CreateUserDto } from './dto/create-user.dto'
 
 @Injectable()
 export class UsersService {
@@ -18,9 +19,17 @@ export class UsersService {
 			const password = process.env.CONFIGER_PASS || 'admin'
 			const hashPassword = await hash(password, 5)
 
-			await this.userRepository.create({ login, password: hashPassword })
+			await this.create({ login, password: hashPassword })
 		} catch (e) {
 			console.error(`Error create default user: `, e)
 		}
+	}
+
+	async create(dto: CreateUserDto): Promise<UserModel> {
+		return await this.userRepository.create({ login: dto.login, password: dto.password })
+	}
+
+	async getByLogin(login: string): Promise<UserModel> {
+		return await this.userRepository.findOne({ where: { login } })
 	}
 }

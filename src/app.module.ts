@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { SequelizeModule } from '@nestjs/sequelize'
 import { UsersModule } from './users/users.module'
+import { AuthModule } from './auth/auth.module'
 import { ConfigsModule } from './configs/configs.module'
 import { UserModel } from './users/users.model'
 import { ConfigModel } from './configs/configs.model'
@@ -23,6 +24,7 @@ import { ConfigModel } from './configs/configs.model'
 			logging: false /* TODO change to loglevel */
 		}),
 		UsersModule,
+		AuthModule,
 		ConfigsModule
 	]
 })
