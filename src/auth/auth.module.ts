@@ -15,6 +15,7 @@ import { UsersModule } from '../users/users.module'
 				expiresIn: '1h'
 			}
 		})
-	]
+	],
+	exports: [JwtModule]
 })
 export class AuthModule {}
