@@ -25,4 +25,10 @@ export class ConfigsController {
 	getConfig(@Param() params: GetConfigDto) {
 		return this.configsService.getConfig(params)
 	}
+
+	@Get('all')
+	@UseGuards(JwtAuthGuard)
+	getAll() {
+		return this.configsService.getAll()
+	}
 }

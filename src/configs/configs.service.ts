@@ -40,12 +40,19 @@ export class ConfigsService {
 
 		await this.validateUpdateConfig(dto)
 
-		return await this.configRepository.update({ data }, { where: { name, env } })
+		return await this.configRepository.update(
+			{ data },
+			{ where: { name, env }, returning: true }
+		)
 	}
 
 	async getConfig(dto: GetConfigDto) {
 		return await this.configRepository.findOne({
 			where: { name: dto.name, env: dto.env }
 		})
+	}
+
+	async getAll() {
+		return await this.configRepository.findAll()
 	}
 }
