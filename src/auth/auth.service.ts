@@ -8,7 +8,8 @@ import { LoginResDto } from './dto/login-res.dto'
 
 @Injectable()
 export class AuthService {
-	constructor(private jwtService: JwtService, private usersService: UsersService) {}
+	constructor(private jwtService: JwtService, private usersService: UsersService) {
+	}
 
 	private async generateToken(user: UserModel): Promise<LoginResDto> {
 		const payload = { id: user.id, login: user.login }
@@ -23,8 +24,9 @@ export class AuthService {
 		}
 
 		const user = await this.usersService.getByLogin(loginData.login)
-		const passwordEquals = await compare(loginData.password, user.password)
+		if (!user) throw new UnauthorizedException({ message: 'Invalid login or password' })
 
+		const passwordEquals = await compare(loginData.password, user.password)
 		if (!user || !passwordEquals) {
 			throw new UnauthorizedException({ message: 'Invalid login or password' })
 		}
