@@ -15,6 +15,8 @@ ENV for start server:
 APP_PORT=5000
 NODE_ENV=production
 
+FRONT_URL=http://localhost:3000
+
 DB_NAME=configer
 DB_USER=configer
 DB_PASSWORD=6aa26d02-14b2-4158-8028-22da1f59b07c
