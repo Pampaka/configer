@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
 import { UserModel } from './users.model'
 import { hash } from 'bcrypt'
-import { CreateUserDto } from './dto/create-user.dto'
+import { CreateUserDto } from './dtos/create-user.dto'
 
 @Injectable()
 export class UsersService {
