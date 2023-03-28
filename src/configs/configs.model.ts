@@ -9,6 +9,14 @@ interface ConfigCreationAttributes {
 @Table({ tableName: 'configs' })
 export class ConfigModel extends Model<ConfigModel, ConfigCreationAttributes> {
 	@Column({
+		type: DataType.UUID,
+		allowNull: false,
+		primaryKey: true,
+		defaultValue: DataType.UUIDV4
+	})
+	id: string
+
+	@Column({
 		type: DataType.STRING,
 		allowNull: false,
 		primaryKey: true
