@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Put, UseGuards, Delete } from '@nestjs/common'
 import { ConfigsService } from './configs.service'
 import { CreateConfigDto } from './dtos/create-config.dto'
 import { GetConfigDto } from './dtos/get-config.dto'
@@ -14,10 +14,16 @@ export class ConfigsController {
 		return this.configsService.createConfig(configDto)
 	}
 
-	@Put(':name/:env')
+	@Put(':id')
 	@UseGuards(JwtAuthGuard)
-	update(@Param() params: GetConfigDto, @Body('data') data: object) {
-		return this.configsService.updateConfig(params, data)
+	update(@Param('id') id: string, @Body() configDto: CreateConfigDto) {
+		return this.configsService.updateConfig(id, configDto)
+	}
+
+	@Delete(':id')
+	@UseGuards(JwtAuthGuard)
+	removeById(@Param('id') id: string) {
+		return this.configsService.removeById(id)
 	}
 
 	// will be removed when rabbitmq/redis is connected

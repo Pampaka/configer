@@ -20,30 +20,20 @@ export class ConfigsService {
 		}
 	}
 
-	async validateUpdateConfig(dto: GetConfigDto) {
-		const config = await this.getConfig(dto)
-		if (!config) {
-			throw new BadRequestException({
-				message: `Config "${dto.name}:${dto.env}" does not exist`
-			})
-		}
-	}
-
 	async createConfig(dto: CreateConfigDto) {
 		await this.validateCreateConfig(dto)
 
 		return await this.configRepository.create(dto)
 	}
 
-	async updateConfig(dto: GetConfigDto, data: object) {
-		const { name, env } = dto
+	async updateConfig(id: string, dto: CreateConfigDto): Promise<ConfigModel | null> {
+		const res = await this.configRepository.update(dto, { where: { id }, returning: true })
+		if (res?.[1]?.length !== 1) return null
+		return res[1][0]
+	}
 
-		await this.validateUpdateConfig(dto)
-
-		return await this.configRepository.update(
-			{ data },
-			{ where: { name, env }, returning: true }
-		)
+	async removeById(id: string) {
+		return await this.configRepository.destroy({ where: { id } })
 	}
 
 	async getConfig(dto: GetConfigDto) {
