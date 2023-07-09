@@ -26,7 +26,6 @@ export class ConfigsController {
 		return this.configsService.removeById(id)
 	}
 
-	// will be removed when rabbitmq/redis is connected
 	@Get(':name/:env')
 	getConfig(@Param() params: GetConfigDto) {
 		return this.configsService.getConfig(params)
