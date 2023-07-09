@@ -16,12 +16,12 @@ import { ConfigModel } from './configs/configs.model'
 			dialect: 'postgres',
 			host: process.env.DB_HOST || 'localhost',
 			port: Number(process.env.DB_PORT) || 5432,
-			username: process.env.DB_USER || 'mi-life',
-			password: process.env.DB_PASS || 'root',
-			database: process.env.DB_NAME || 'mi-life',
+			username: process.env.DB_USER || 'configer',
+			password: process.env.DB_PASS || 'password',
+			database: process.env.DB_NAME || 'configer',
 			models: [ConfigModel, UserModel],
 			autoLoadModels: true,
-			logging: false /* TODO change to loglevel */
+			logging: false /* TODO change to logger */
 		}),
 		UsersModule,
 		AuthModule,

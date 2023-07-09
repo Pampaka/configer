@@ -9,10 +9,12 @@ WORKDIR  /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --omit=dev
 
 COPY . .
 
-COPY ./build ./build
+RUN npm run build
+
+COPY ./dist ./dist
 
 CMD ["npm", "run", "start"]
